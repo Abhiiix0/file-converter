@@ -160,10 +160,10 @@ const VideoCompress = () => {
 
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col justify-start items-center bg-slate-50 p-3 md:p-6">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
+      <h1 className=" text-xl sm:text-4xl font-bold text-center text-gray-800 mb-4">
         <CompressOutlined /> Video Compressor
       </h1>
-      <p className="text-center text-lg text-gray-600">
+      <p className="text-center text-lg text-gray-600 ">
         Upload your Videos and compress them to desired resolutions!
       </p>
 
@@ -172,7 +172,7 @@ const VideoCompress = () => {
           beforeUpload={() => false}
           onChange={handleFileUpload}
           showUploadList={false}
-          className="w-[650px] h-[220px] my-6"
+          className="  w-full sm:w-[650px] h-[220px] my-6"
         >
           <p className="ant-upload-text">Click or drag Image to upload</p>
           <p className="ant-upload-hint">Max file size 1GB</p>
@@ -194,13 +194,15 @@ const VideoCompress = () => {
         {files.map((fileObj) => (
           <div
             key={fileObj.filename}
-            className="bg-white shadow-sm border flex items-center justify-between rounded-md w-full md:w-[650px] h-[60px] px-2 mb-4"
+            className="bg-white shadow-sm border flex flex-col sm:flex-row sm:items-center justify-between rounded-md w-full md:w-[650px] h-fit pb-2 sm:pb-0 sm:h-[60px] px-2 mb-4"
           >
             <div>
               <p className="text-ellipsis w-full md:w-[250px] text-[13px] md:text-[16px] text-wrap h-6 overflow-hidden m-0">
                 {fileObj.filename}
               </p>
-              <p className="m-0 text-gray-400 text-[12px]">{fileObj.size}</p>
+              <p className="m-0 mt-[-5px] mb-1 text-gray-400 text-[12px]">
+                {fileObj.size}
+              </p>
             </div>
             <div className="flex gap-2">
               <Select
@@ -211,11 +213,15 @@ const VideoCompress = () => {
                     [fileObj.filename]: value,
                   }))
                 }
-                className="w-[120px]"
+                className="w-[100px] sm:w-[120px] text-sm"
                 placeholder="Resolution"
               >
                 {resolutionOptions.map((option) => (
-                  <Option key={option.value} value={option.value}>
+                  <Option
+                    key={option.value}
+                    className=" text-sm"
+                    value={option.value}
+                  >
                     {option.label}
                   </Option>
                 ))}
@@ -230,13 +236,14 @@ const VideoCompress = () => {
                   "Compress"
                 )}
               </button>
-              {fileObj.downloadUrl && (
+              {!fileObj.downloadUrl && (
                 <a
                   href={fileObj.downloadUrl}
                   download={`compressed_${fileObj.filename}`}
                   className="bg-blue-500 hover:bg-blue-600 h-8 px-2 text-white rounded-md flex items-center"
                 >
-                  <DownloadOutlined style={{ marginRight: "4px" }} /> Download
+                  <DownloadOutlined style={{ marginRight: "4px" }} />{" "}
+                  <p className=" hidden sm:block">Download</p>
                 </a>
               )}
               <button

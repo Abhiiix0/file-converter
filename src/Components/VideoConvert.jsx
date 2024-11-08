@@ -151,7 +151,7 @@ const VideoConvert = () => {
         files?.length === 0 ? " justify-center" : " justify-start"
       } items-center bg-gradient-to-r bg-slate-50 p-3 md:p-6`}
     >
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
+      <h1 className=" text-xl sm:text-4xl font-bold text-center text-gray-800 mb-4">
         <VideoCameraOutlined /> Video Converter
       </h1>
       <p className="text-center text-lg text-gray-600 ">
@@ -163,7 +163,7 @@ const VideoConvert = () => {
           beforeUpload={() => false}
           onChange={handleFileUpload}
           showUploadList={false}
-          className="w-[650px] h-[220px] my-6"
+          className=" w-full sm:w-[650px] h-[220px] my-6"
         >
           <p className="ant-upload-text">Click or drag Image to upload</p>
           <p className="ant-upload-hint">Max file size 1GB</p>
@@ -185,13 +185,15 @@ const VideoConvert = () => {
         {files.map((fileObj) => (
           <div
             key={fileObj.filename}
-            className="bg-white shadow-sm border flex items-center justify-between rounded-md w-full md:w-[650px] h-[60px] px-2 mb-4"
+            className="bg-white shadow-sm border flex flex-col sm:flex-row sm:items-center justify-between rounded-md w-full md:w-[650px] h-fit pb-2 sm:pb-0 sm:h-[60px] px-2 mb-4"
           >
             <div>
               <p className="text-ellipsis  w-full md:w-[250px] text-[13px] md:text-[16px] text-wrap h-6 overflow-hidden m-0">
                 {fileObj.filename}
               </p>
-              <p className="m-0 text-gray-400 text-[12px]">{fileObj.size}</p>
+              <p className="m-0 mt-[-5px] mb-1 text-gray-400 text-[12px]">
+                {fileObj.size}
+              </p>
             </div>
             <div className="flex gap-2">
               <Select

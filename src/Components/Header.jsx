@@ -132,22 +132,44 @@ const Header = () => {
       </div> */}
       <Drawer className=" md:hidden" onClose={onClose} open={open}>
         <div className=" flex flex-col justify-between h-full">
-          <div>
-            <p className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2">
+          <div className=" flex flex-col ">
+            <Link
+              to="/"
+              onClick={onClose}
+              className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2"
+            >
               Image
-            </p>
-            <p className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2">
-              Pdf
-            </p>
-            <p className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2">
-              Video
-            </p>
+            </Link>
+            <Link
+              to="/video-convert"
+              onClick={onClose}
+              className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2"
+            >
+              Video Formate
+            </Link>
+            <Link
+              to="/video-compress"
+              onClick={onClose}
+              className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2"
+            >
+              Video Compress
+            </Link>
           </div>
-          <div>
-            <p className=" font-medium text-lg  uppercase  py-2 px-2">About</p>
-            <p className=" font-medium text-lg  uppercase  py-2 px-2">
+          <div className=" flex flex-col ">
+            <Link
+              to="/about"
+              onClick={onClose}
+              className=" font-medium text-lg  uppercase  py-2 px-2"
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              onClick={onClose}
+              className=" font-medium text-lg  uppercase  py-2 px-2"
+            >
               Contact
-            </p>
+            </Link>
           </div>
         </div>
       </Drawer>

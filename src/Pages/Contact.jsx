@@ -1,6 +1,10 @@
-// src/Components/Contact.js
 import React, { useState } from "react";
-import { MailOutlined } from "@ant-design/icons";
+import {
+  MailOutlined,
+  LinkedinOutlined,
+  InstagramOutlined,
+} from "@ant-design/icons";
+import { message } from "antd";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,28 +13,52 @@ const Contact = () => {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xyzywobj", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(response);
+      if (response.ok) {
+        message.success("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        message.error("Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      message.error("An error occurred. Please try again later.");
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-2 bg-slate-100">
-      <h2 className=" text-2xl sm:text-4xl font-bold text-black mb-4 sm:mb-6">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4 bg-slate-100">
+      <h2 className="text-2xl mt-6 sm:text-4xl font-bold text-black mb-4 sm:mb-6">
         Contact Us
       </h2>
-      <p className=" sm:text-lg text-black mb-4 sm:mb-9 text-center max-w-xl">
+      <p className="sm:text-lg text-black mb-4 sm:mb-9 text-center max-w-xl">
         We would love to hear from you! Please fill out the form below, and we
         will get back to you as soon as possible.
       </p>
-      <div className="bg-white shadow-lg rounded-lg p-5 sm:p-8 max-w-3xl  w-full">
+
+      <div className="bg-white shadow-lg rounded-lg p-5 sm:p-8 max-w-3xl mb-8 w-full">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className=" sm:flex gap-4">
+          <div className="sm:flex gap-4">
             <div className="w-full">
               <label
                 htmlFor="name"
@@ -85,20 +113,41 @@ const Contact = () => {
           </div>
           <button
             type="submit"
+            disabled={isSubmitting}
             className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
           >
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </button>
         </form>
-      </div>
-      <div className="mt-8 hidden text-center">
-        <h3 className="text-2xl font-semibold mb-2 text-black">
-          Contact Information
-        </h3>
-        <div className="flex items-center justify-center space-x-8">
-          <div className="flex items-center">
-            <MailOutlined className="text-blue-500 text-xl sm:text-2xl mr-2" />
-            <span className="text-black">info@fileconverter.com</span>
+
+        {/* Contact Information Section */}
+        <div className="flex flex-col items-center justify-center mt-5">
+          <h3 className="text-lg font-semibold text-black mb-2">
+            You can also reach me at:
+          </h3>
+          <div className="flex gap-6">
+            <a
+              href="https://www.linkedin.com/in/abhishek-nayak-6375ab128/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-700 hover:text-blue-800 text-2xl"
+            >
+              <LinkedinOutlined />
+            </a>
+            <a
+              href="https://www.instagram.com/abhiiii.x0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-600 hover:text-pink-700 text-2xl"
+            >
+              <InstagramOutlined />
+            </a>
+            <a
+              href="mailto:abhishek.nayak7766@gmail.com"
+              className="text-red-600 hover:text-red-700 text-2xl"
+            >
+              <MailOutlined />
+            </a>
           </div>
         </div>
       </div>
