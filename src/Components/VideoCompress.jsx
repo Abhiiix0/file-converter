@@ -6,7 +6,6 @@ import {
   CompressOutlined,
   DeleteOutlined,
   DownloadOutlined,
-  LoadingOutlined,
 } from "@ant-design/icons";
 
 const { Dragger } = Upload;
@@ -107,7 +106,6 @@ const VideoCompress = () => {
     if (!ffmpeg || !fileObj.file || !outputResolution[fileObj.filename]) return;
 
     setLoading((prevLoading) => ({ ...prevLoading, [fileObj.filename]: true }));
-    // message.info("Compressing...");
 
     try {
       await ffmpeg.writeFile(fileObj.filename, await fetchFile(fileObj.file));

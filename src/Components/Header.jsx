@@ -25,7 +25,7 @@ const Header = () => {
             navSelect === "VIDEO" && "text-blue-500"
           }  hover:text-blue-500 tracking-wider`}
         >
-          Video Formate
+          Video Format
         </Link>
       ),
     },
@@ -44,22 +44,7 @@ const Header = () => {
       ),
     },
   ];
-  const imgFormate = [
-    {
-      key: "1",
-      label: (
-        <Link
-          to="/"
-          onClick={() => setnavSelect("IMAGE")}
-          className={` cursor-pointer ${
-            navSelect === "VIDEO" && "text-blue-500"
-          }  hover:text-blue-500 tracking-wider`}
-        >
-          Image Compress
-        </Link>
-      ),
-    },
-  ];
+
   return (
     <div className=" h-16 w-full bg-white border-b">
       <div className=" flex items-center h-full justify-between px-4">
@@ -145,7 +130,7 @@ const Header = () => {
               onClick={onClose}
               className=" font-medium text-lg  uppercase hover:bg-blue-400 py-2 hover:text-white rounded-md px-2"
             >
-              Video Formate
+              Video Format
             </Link>
             <Link
               to="/video-compress"

@@ -83,15 +83,7 @@ const VideoConvert = () => {
     if (!ffmpeg || !fileObj.file || !outputFormat[fileObj.filename]) return;
 
     setLoading((prevLoading) => ({ ...prevLoading, [fileObj.filename]: true }));
-    message.info("Converting...");
-    const progressHandler = (progress) => {
-      if (progress && progress.ratio) {
-        const progressPercent = Math.round(progress.ratio * 100);
-        // Update the UI or show progress to the user
-        // setProgress(progressPercent);
-        message.info(`Conversion progress: ${progressPercent}%`);
-      }
-    };
+
     try {
       await ffmpeg.writeFile(fileObj.filename, await fetchFile(fileObj.file));
       ffmpeg.on("progress", (progress) => {
