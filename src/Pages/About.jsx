@@ -34,16 +34,16 @@ const About = () => {
       id: 1,
       title: "Wide Format Support",
       description:
-        "Convert images, videos, and PDF files with ease using our intuitive interface.",
+        "Convert images & videos files with ease using our intuitive interface.",
       icon: <FileImageOutlined className="text-green-500 text-3xl mr-4" />,
     },
   ];
   return (
-    <div className="flex flex-col items-center justify-center h-[calc(100vh-64px)] bg-gradient-to-r bg-slate-100 from-transparent  p-6">
-      <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] bg-gradient-to-r bg-slate-100 from-transparent  p-6">
+      <h2 className=" text-2xl sm:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">
         About File Converter
       </h2>
-      <p className="text-lg text-gray-700 mb-4 text-center max-w-xl">
+      <p className="sm:text-lg text-black mb-4 sm:mb-9 text-center max-w-xl">
         Welcome to our File Converter website! We provide a secure and efficient
         way to convert your files to various formats. Our service is designed to
         handle video, image, and PDF conversions while ensuring that your data
@@ -51,8 +51,8 @@ const About = () => {
       </p>
       <div className=" flex flex-row items-center flex-wrap justify-center gap-6 w-full ">
         {features.map((feature) => (
-          <div className="flex flex-col w-[300px] h-[180px] items-center p-4 bg-white shadow-md rounded-md">
-            <div className=" w-full flex justify-between items-center">
+          <div className="flex flex-col w-[300px] h-[150px] sm:h-[180px] items-center p-3 sm:p-4 bg-white shadow-md rounded-md">
+            <div className=" w-full flex items-center">
               {feature?.icon}
               <h3 className="text-xl font-semibold">{feature?.title}</h3>
             </div>
@@ -73,7 +73,7 @@ const About = () => {
         <ul className="list-disc list-inside text-gray-700">
           <li>Image Files (e.g., JPG, PNG, GIF)</li>
           <li>Video Files (e.g., MP4, AVI, MOV)</li>
-          <li>PDF Files</li>
+          {/* <li>PDF Files</li> */}
         </ul>
         <p className="mt-4 text-lg text-gray-700">
           Convert your files easily and efficiently using our intuitive

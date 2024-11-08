@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EasyConerter from "../assets/EasyConerter.png";
 import { MenuUnfoldOutlined } from "@ant-design/icons";
-import { Drawer } from "antd";
+import { Button, Drawer, Dropdown } from "antd";
 import { Link } from "react-router-dom";
 const Header = () => {
   const [navSelect, setnavSelect] = useState("");
@@ -14,12 +14,58 @@ const Header = () => {
   const onClose = () => {
     setOpen(false);
   };
+  const items = [
+    {
+      key: "1",
+      label: (
+        <Link
+          to="video-convert"
+          onClick={() => setnavSelect("VIDEO")}
+          className={` cursor-pointer ${
+            navSelect === "VIDEO" && "text-blue-500"
+          }  hover:text-blue-500 tracking-wider`}
+        >
+          Video Formate
+        </Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Link
+          to="video-compress"
+          onClick={() => setnavSelect("VIDEO")}
+          className={` cursor-pointer ${
+            navSelect === "VIDEO" && "text-blue-500"
+          }  hover:text-blue-500 tracking-wider`}
+        >
+          Video Compress
+        </Link>
+      ),
+    },
+  ];
+  const imgFormate = [
+    {
+      key: "1",
+      label: (
+        <Link
+          to="/"
+          onClick={() => setnavSelect("IMAGE")}
+          className={` cursor-pointer ${
+            navSelect === "VIDEO" && "text-blue-500"
+          }  hover:text-blue-500 tracking-wider`}
+        >
+          Image Compress
+        </Link>
+      ),
+    },
+  ];
   return (
     <div className=" h-16 w-full bg-white border-b">
       <div className=" flex items-center h-full justify-between px-4">
         <img src={EasyConerter} className=" bg-blend-darken h-8" alt="" />
         <div className=" hidden md:flex gap-4">
-          <Link
+          {/* <Link
             to="/"
             onClick={() => setnavSelect("PDF")}
             className={` cursor-pointer ${
@@ -27,25 +73,27 @@ const Header = () => {
             }  hover:text-blue-500 font-bold text-lg tracking-wider`}
           >
             PDF
-          </Link>
+          </Link> */}
           <Link
             to="/"
-            onClick={() => setnavSelect("IMAGE")}
+            // onClick={() => setnavSelect("IMAGE")}
             className={` cursor-pointer ${
               navSelect === "IMAGE" && "text-blue-500"
-            }  hover:text-blue-500 font-bold text-lg tracking-wider`}
+            }  hover:text-blue-500 font-bold text-lg h-[50px] grid place-content-center tracking-wider`}
           >
             IMAGE
           </Link>
-          <Link
-            to="video-convert"
-            onClick={() => setnavSelect("VIDEO")}
-            className={` cursor-pointer ${
-              navSelect === "VIDEO" && "text-blue-500"
-            }  hover:text-blue-500 font-bold text-lg tracking-wider`}
+
+          <Dropdown
+            menu={{
+              items,
+            }}
+            placement="bottom"
           >
-            VIDEO
-          </Link>
+            <p className="font-bold hover:text-blue-500 cursor-pointer h-[50px] grid place-content-center text-lg tracking-wider">
+              VIDEO
+            </p>
+          </Dropdown>
         </div>
         <div className="  hidden md:flex   gap-4">
           <Link

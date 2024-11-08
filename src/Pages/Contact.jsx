@@ -20,47 +20,51 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] bg-slate-100">
-      <h2 className="text-4xl font-bold text-black mb-6">Contact Us</h2>
-      <p className="text-lg text-black mb-4 text-center max-w-xl">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-2 bg-slate-100">
+      <h2 className=" text-2xl sm:text-4xl font-bold text-black mb-4 sm:mb-6">
+        Contact Us
+      </h2>
+      <p className=" sm:text-lg text-black mb-4 sm:mb-9 text-center max-w-xl">
         We would love to hear from you! Please fill out the form below, and we
         will get back to you as soon as possible.
       </p>
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+      <div className="bg-white shadow-lg rounded-lg p-5 sm:p-8 max-w-3xl  w-full">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-black"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-black"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
-            />
+          <div className=" sm:flex gap-4">
+            <div className="w-full">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-black"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
+              />
+            </div>
+            <div className="w-full">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-black"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
+              />
+            </div>
           </div>
           <div>
             <label
@@ -87,13 +91,13 @@ const Contact = () => {
           </button>
         </form>
       </div>
-      <div className="mt-8 text-center">
-        <h3 className="text-2xl font-semibold mb-4 text-black">
+      <div className="mt-8 hidden text-center">
+        <h3 className="text-2xl font-semibold mb-2 text-black">
           Contact Information
         </h3>
         <div className="flex items-center justify-center space-x-8">
           <div className="flex items-center">
-            <MailOutlined className="text-blue-500 text-2xl mr-2" />
+            <MailOutlined className="text-blue-500 text-xl sm:text-2xl mr-2" />
             <span className="text-black">info@fileconverter.com</span>
           </div>
         </div>

@@ -5,6 +5,7 @@ import FileConvert from "./Components/FileConvert";
 import VideoConvert from "./Components/VideoConvert";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import VideoCompress from "./Components/VideoCompress";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<FileConvert />} />
         <Route path="/video-convert" element={<VideoConvert />} />
+        <Route path="/video-compress" element={<VideoCompress />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

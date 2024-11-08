@@ -5,6 +5,7 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import {
   DeleteOutlined,
   DownloadOutlined,
+  FileImageOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
 
@@ -52,21 +53,35 @@ const FileConvert = () => {
     const newFiles = info.fileList
       .map((item) => item.originFileObj)
       .filter(Boolean);
-    const updatedFiles = newFiles.map((newFile) => ({
-      file: newFile,
-      filename: newFile.name,
-      size: formatFileSize(newFile.size),
-      downloadUrl: "",
-    }));
+    const updatedFiles = newFiles.map((newFile) => {
+      const fileExtension = newFile.name.split(".").pop().toLowerCase();
+
+      return {
+        file: newFile,
+        filename: newFile.name,
+        size: formatFileSize(newFile.size),
+        downloadUrl: "",
+        format: fileExtension,
+      };
+    });
+
+    // Automatically detect file format and set it in the dropdown
+    const initialFormats = {};
+    updatedFiles.forEach((file) => {
+      if (imgOptions.includes(file.format)) {
+        initialFormats[file.filename] = file.format;
+      }
+    });
 
     setFiles((prevFiles) => [...prevFiles, ...updatedFiles]);
+    setOutputFormat((prevFormat) => ({ ...prevFormat, ...initialFormats }));
   };
 
   const handleConvert = async (fileObj) => {
     if (!ffmpeg || !fileObj.file || !outputFormat[fileObj.filename]) return;
 
     setLoading((prevLoading) => ({ ...prevLoading, [fileObj.filename]: true }));
-    message.info("Converting...");
+    // message.info("Converting...");
 
     try {
       await ffmpeg.writeFile(fileObj.filename, await fetchFile(fileObj.file));
@@ -115,8 +130,8 @@ const FileConvert = () => {
         files?.length === 0 ? " justify-center" : " justify-start"
       } items-center bg-gradient-to-r bg-slate-50 p-3 md:p-6`}
     >
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
-        Image Converter
+      <h1 className=" text-xl sm:text-4xl font-bold text-center text-gray-800 mb-4">
+        <FileImageOutlined /> Image Converter
       </h1>
       <p className="text-center text-lg text-gray-600 ">
         Upload your images and convert them to desired formats!
@@ -127,10 +142,10 @@ const FileConvert = () => {
           beforeUpload={() => false}
           onChange={handleFileUpload}
           showUploadList={false}
-          className="w-[650px] h-[220px] my-6"
+          className="w-full sm:w-[650px] h-[220px] my-6"
         >
           <p className="ant-upload-text">Click or drag Image to upload</p>
-          <p className="ant-upload-hint">Max file size 1GB</p>
+          {/* <p className="ant-upload-hint">Max file size 1GB</p> */}
         </Dragger>
       ) : (
         <>
@@ -149,13 +164,15 @@ const FileConvert = () => {
         {files.map((fileObj) => (
           <div
             key={fileObj.filename}
-            className="bg-white shadow-sm border flex items-center justify-between rounded-md w-full md:w-[650px] h-[60px] px-2 mb-4"
+            className="bg-white shadow-sm border flex flex-col sm:flex-row sm:items-center justify-between rounded-md w-full md:w-[650px] h-fit pb-2 sm:pb-0 sm:h-[60px] px-2 mb-4"
           >
             <div>
               <p className="text-ellipsis  w-full md:w-[250px] text-[13px] md:text-[16px] text-wrap h-6 overflow-hidden m-0">
                 {fileObj.filename}
               </p>
-              <p className="m-0 text-gray-400 text-[12px]">{fileObj.size}</p>
+              <p className="m-0 mt-[-5px] mb-1 text-gray-400 text-[12px]">
+                {fileObj.size}
+              </p>
             </div>
             <div className="flex gap-2">
               <Select
@@ -177,12 +194,11 @@ const FileConvert = () => {
               </Select>
               <button
                 onClick={() => handleConvert(fileObj)}
-                className=" bg-blue-500  hover:bg-blue-600 h-8 px-2 text-white  rounded-md "
+                className="bg-blue-500 hover:bg-blue-600 h-8 px-2 text-white rounded-md"
               >
                 {loading[fileObj.filename] ? (
                   <>
-                    {" "}
-                    <LoadingOutlined /> Convert . . .
+                    <LoadingOutlined /> Converting . . .
                   </>
                 ) : (
                   "Convert"
